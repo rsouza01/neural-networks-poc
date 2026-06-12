@@ -1,0 +1,39 @@
+[project]
+name = "neural_networks_poc"
+version = "0.1.0"
+description = "Proof of concept neural networks package using src layout."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [ { name = "Your Name" } ]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "black",
+    "ruff",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "--strict-markers"
+testpaths = ["tests"]

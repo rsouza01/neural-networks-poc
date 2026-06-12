@@ -1,0 +1,36 @@
+version: "3"
+
+vars:
+  GREETING: Neural networks training
+  VENV_BIN: .venv/bin
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  # 1. Run this first! It reads pyproject.toml and installs everything.
+  dep:install:
+    desc: "Install the project and dependencies from pyproject.toml"
+    cmds:
+      - "{{.VENV_BIN}}/pip install -e '.[dev]'"
+
+  # 2. Run this after install to generate your lockfile.
+  dep:lock:
+    desc: "Freeze the current environment into a lockfile"
+    cmds:
+      - "{{.VENV_BIN}}/pip freeze > requirements.txt"
+
+  # 3. Use this in CI pipelines or if someone clones your repo later.
+  dep:sync:
+    desc: "Install exactly what is in the lockfile"
+    cmds:
+      - "{{.VENV_BIN}}/pip install -r requirements.txt"
+      - "{{.VENV_BIN}}/pip install -e ."
+
+# --- Testing Tasks ---
+  run-step-1:
+    desc: "Run step 1"
+    cmds:
+      - "{{.VENV_BIN}}/python ./src/neural_networks_poc/step_1.py"
