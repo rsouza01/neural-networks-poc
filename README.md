@@ -1,5 +1,7 @@
 # neural-networks-poc
 
+![Logo](image.png)
+
 ## Local build (with virtual environment)
 
 ### Taskfile
